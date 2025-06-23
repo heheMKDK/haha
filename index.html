@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,6 +8,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <style>
+    #kitty {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      border-radius: 20px;
+      display: inline-block;
+    }
+  </style>
 </head>
 <body>
   <!-- Intro Screen -->
@@ -24,7 +34,7 @@
   <!-- Game Container -->
   <div id="game-container" class="hidden">
     <div id="counter">Cakes: 0</div>
-    <img id="kitty" src="images/kitty_stand.png" alt="Hello Kitty" />
+    <div id="kitty" title="Hello Kitty"></div>
     <div id="cakes-container"></div>
     <div id="popup" class="hidden">
       <h2 id="popup-title">🎉🎂 Happy Birthday! 🎂🎉</h2>
@@ -33,11 +43,45 @@
     </div>
   </div>
 
-  <!-- Sounds -->
-  <audio id="walkSound" src="sounds/walk.mp3" preload="auto"></audio>
-  <audio id="eatSound" src="sounds/eat.mp3" preload="auto"></audio>
-  <audio id="popupSound" src="sounds/popup.mp3" preload="auto"></audio>
+  <script>
+    // Simple placeholder "beep" sound using Web Audio API
+    function playBeep(freq = 440, duration = 150) {
+      const context = new AudioContext();
+      const oscillator = context.createOscillator();
+      const gainNode = context.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(context.destination);
+      oscillator.frequency.value = freq;
+      oscillator.type = "sine";
+      oscillator.start();
+      setTimeout(() => {
+        oscillator.stop();
+        context.close();
+      }, duration);
+    }
 
-  <script src="script.js"></script>
+    function startGame() {
+      document.getElementById('intro-screen').classList.add('hidden');
+      document.getElementById('game-container').classList.remove('hidden');
+      playBeep(); // substitute for walk sound
+    }
+
+    function resetGame() {
+      location.reload();
+    }
+
+    // Simulate a "cake collected" action
+    document.getElementById("kitty").addEventListener("click", () => {
+      let counter = document.getElementById("counter");
+      let current = parseInt(counter.textContent.replace("Cakes: ", ""));
+      counter.textContent = "Cakes: " + (current + 1);
+      playBeep(880, 100); // simulate eat sound
+      if (current + 1 === 5) {
+        document.getElementById("popup").classList.remove("hidden");
+        confetti(); // show confetti
+        playBeep(660, 300); // simulate popup sound
+      }
+    });
+  </script>
 </body>
 </html>
