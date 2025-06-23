@@ -1,101 +1,55 @@
-﻿body {
+body {
   margin: 0;
-  font-family: 'Cherry Bomb One', cursive;
-  background-color: #fff0f5;
+  font-family: "Cherry Bomb One", cursive;
+  background: linear-gradient(to top, #ffe0f0, #ffffff);
   overflow: hidden;
 }
 
-#intro-screen {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background-color: #ffe4f1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+#intro-screen, #popup {
   text-align: center;
-  z-index: 10000;
-}
-
-#intro-screen h1 {
-  font-size: 48px;
-  color: hotpink;
-  margin-bottom: 20px;
-}
-
-#intro-screen input {
-  padding: 10px;
-  font-size: 18px;
-  border: 2px solid hotpink;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  outline: none;
-  text-align: center;
-}
-
-#intro-screen button {
-  padding: 12px 24px;
-  background-color: hotpink;
-  color: white;
-  border: none;
-  border-radius: 15px;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 0 10px #ff69b4;
+  padding: 20px;
 }
 
 #game-container {
   position: relative;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 #kitty {
   position: absolute;
   width: 80px;
-  height: 80px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
+  top: 50px;
+  left: 50px;
+  transition: all 0.1s linear;
 }
 
-#cakes-container img {
+.cake {
   position: absolute;
-  width: 50px;
-  transition: 0.2s ease-in;
+  width: 40px;
 }
 
 #counter {
   position: absolute;
   top: 10px;
   left: 10px;
-  font-size: 24px;
-  background: white;
-  padding: 5px 15px;
-  border-radius: 12px;
-  box-shadow: 0 0 5px pink;
-  z-index: 20;
-  font-weight: bold;
-  color: #ff69b4;
+  font-size: 20px;
 }
 
-#popup {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  padding: 30px;
-  border: 5px solid pink;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 0 20px hotpink;
-  z-index: 1000;
-  font-size: 20px;
-  font-weight: bold;
-  color: #ff1493;
+.cloud {
+  position: absolute;
+  width: 100px;
+  height: 60px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: floatCloud linear infinite;
+}
+
+@keyframes floatCloud {
+  0% { left: -120px; }
+  100% { left: 100vw; }
 }
 
 .hidden {
