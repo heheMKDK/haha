@@ -1,5 +1,4 @@
-﻿let playerName = "You";
-let isWalking = false;
+let playerName = "You";
 let frameToggle = false;
 
 const kitty = document.getElementById("kitty");
@@ -14,6 +13,7 @@ const popupSound = document.getElementById("popupSound");
 
 let cakeCount = 0;
 let cakes = [];
+let walkTimeout;
 
 function startGame() {
   const nameInput = document.getElementById("player-name-input").value.trim();
@@ -30,20 +30,18 @@ function startGame() {
 }
 
 function animateKitty() {
-  kitty.src = frameToggle ? "images/kitty_walk.png" : "images/kitty_stand.png";
+  kitty.src = frameToggle ? "kitty_walk.png" : "kitty_stand.png";
   frameToggle = !frameToggle;
   clearTimeout(walkTimeout);
   walkTimeout = setTimeout(() => {
-    kitty.src = "images/kitty_stand.png";
+    kitty.src = "kitty_stand.png";
   }, 300);
 }
-
-let walkTimeout;
 
 function createCakes() {
   for (let i = 0; i < 15; i++) {
     const cake = document.createElement("img");
-    cake.src = "images/cake.png";
+    cake.src = "cake.png";
     cake.classList.add("cake");
     cake.style.top = Math.random() * 90 + "%";
     cake.style.left = Math.random() * 90 + "%";
