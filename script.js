@@ -1,4 +1,5 @@
 let playerName = "You";
+let isWalking = false;
 let frameToggle = false;
 
 const kitty = document.getElementById("kitty");
@@ -13,7 +14,6 @@ const popupSound = document.getElementById("popupSound");
 
 let cakeCount = 0;
 let cakes = [];
-let walkTimeout;
 
 function startGame() {
   const nameInput = document.getElementById("player-name-input").value.trim();
@@ -37,6 +37,8 @@ function animateKitty() {
     kitty.src = "kitty_stand.png";
   }, 300);
 }
+
+let walkTimeout;
 
 function createCakes() {
   for (let i = 0; i < 15; i++) {
